@@ -1,22 +1,23 @@
 import {ADD_TASK, DEL_TASK} from "../constants";
-import {AddTaskType, DelTaskType} from "../../Types/types";
+import {AddTaskType, DelTaskType, IitemState} from "../../Types/types";
 
 const initialState = {
   taskList: []
 }
+
+let maxId = 0
 
 export const todoReducer = (state: any = initialState, action: AddTaskType) => {
   switch(action.type){
     case ADD_TASK:
       return{
         ...state,
-        taskList: [...state.taskList, action.payload]
+        taskList: [...state.taskList, {id: maxId++, value: action.payload}]
       }
     case DEL_TASK:
-      state.taskList.splice(state.taskList.indexOf(action.payload),1)
       return{
         ...state,
-        taskList: state.taskList
+        taskList: state.taskList.filter((e:IitemState) => e.id!= action.payload)
       }
     default:
       return state

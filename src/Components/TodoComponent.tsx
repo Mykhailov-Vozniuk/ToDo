@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import {shallowEqual, useDispatch, useSelector} from 'react-redux';
 import { addTaskAction, delTaskAction } from '../Redux/Actions/actions'
 import {IToDoState} from "../Types/types";
+import {TodoItem} from './TodoItem';
 
 export const TodoComponent = () => {
   const dispatch = useDispatch()
@@ -15,18 +16,14 @@ export const TodoComponent = () => {
     setTask('')
   }
 
-  const delTask = (elem: string) => {
-    dispatch(delTaskAction(elem))
-  }
-
   return(
     <div className="todo">
       <input name="task" value={task} onChange={({target}) => setTask(target.value)} />
       <button onClick={addTask}>Add</button>
       {<div className="task-container">
             <ul>
-              {taskList.map((elem: string, key: number) => (
-                <li key={key}>{elem}<button onClick={() => delTask(elem)}>Delete</button></li>
+              {taskList.map((elem: {id: string, value: string}) => (
+                <li key={elem.id}>{elem.value}{TodoItem({id: elem.id})}</li>//сделать массив объектов с айди и кнопку отдельным жлементом сделать
               ))}
           </ul>
       </div>}

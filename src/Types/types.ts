@@ -5,18 +5,22 @@ export type TYPE_DEL = 'DEL_TASK'
 
 export interface AddTaskType {
 	type: TYPE_ADD,
-	payload: String
+	payload: string
 }
 
 export interface DelTaskType {
 	type: TYPE_DEL,
-	payload: String
+	payload: string
 }
 
 export interface IStore {
-	toDo: IToDoState;
+	toDo: IToDoState
 }
 
 export interface IToDoState {
-	taskList: []
+	taskList: {id: string, value: string} []
+}
+
+export interface IitemState {
+	id: string
 }
