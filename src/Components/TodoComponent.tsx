@@ -9,10 +9,13 @@ export const TodoComponent = () => {
 
   const [task, setTask] = useState<string>('')
 
+  const [maxId, setMaxId] = useState<number>(0)
+
   const taskList = useSelector((state: IToDoState) => state.taskList)
 
   const addTask = () => {
-    dispatch(addTaskAction(task))
+    dispatch(addTaskAction(maxId, task))
+    setMaxId(maxId + 1)
     setTask('')
   }
 
@@ -22,8 +25,8 @@ export const TodoComponent = () => {
       <button onClick={addTask}>Add</button>
       {<div className="task-container">
             <ul>
-              {taskList.map((elem: {id: string, value: string}) => (
-                <li key={elem.id}>{elem.value}{TodoItem({id: elem.id})}</li>//сделать массив объектов с айди и кнопку отдельным жлементом сделать
+              {taskList.map((elem: {id: number, value: string}) => (
+                TodoItem({id: elem.id, value: elem.value})
               ))}
           </ul>
       </div>}

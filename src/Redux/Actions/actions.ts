@@ -1,11 +1,11 @@
-import {ADD_TASK, DEL_TASK} from "../constants";
+import {ADD_TASK, DEL_TASK} from "../constants";//сделать тип для экшенов и потом его экстендить
 
-export const addTaskAction = (value: string) => ({
+export const addTaskAction = (id:number, value: string) => ({
 	type: ADD_TASK,
-	payload: value,
+	payload: {id, value}
 })
 
-export const delTaskAction = (value: string) => ({
+export const delTaskAction = (id: number) => ({
 	type: DEL_TASK,
-	payload: value,
+	payload: {id}
 })

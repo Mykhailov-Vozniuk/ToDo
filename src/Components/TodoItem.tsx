@@ -9,11 +9,11 @@ export const TodoItem = (props: IitemState) => {
 
   const dispatch = useDispatch()
 
-  const delTask = (id: string) => {
+  const delTask = (id: number) => {
     dispatch(delTaskAction(id))
   }
 
   return(
-   <button id={state.id.toString()} onClick={() => delTask(state.id)}>Delete</button>//сделать массив объектов с айди и кнопку отдельным жлементом сделать
+   <li key={state.id}>{state.value}<button id={state.id.toString()} onClick={() => delTask(state.id)}>Delete</button></li>//сделать массив объектов с айди и кнопку отдельным жлементом сделать
   )
 }
